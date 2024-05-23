@@ -144,23 +144,7 @@ const Toolbar = ({
         {/* <Button onClick={refreshView} title="Refresh This View">
           <Icon icon="ic:round-refresh" />
         </Button> */}
-        <Button
-          onClick={quickScreenshot}
-          isLoading={screenshotLoading}
-          title="Quick Screenshot"
-        >
-          <div className="relative h-4 w-4">
-            <Icon
-              icon="ic:outline-photo-camera"
-              className="absolute top-0 left-0"
-            />
-            <Icon
-              icon="clarity:lightning-solid"
-              className="absolute top-[-1px] right-[-2px]"
-              height={8}
-            />
-          </div>
-        </Button>
+
         {/* <Button
           onClick={fullScreenshot}
           isLoading={fullScreenshotLoading}
@@ -178,6 +162,9 @@ const Toolbar = ({
         <Button onClick={openDevTools} title="Open Devtools">
           <Icon icon="ic:round-code" />
         </Button>
+        <Button onClick={toggleRulers} title="Show rulers">
+          <Icon icon="tdesign:measurement-1" />
+        </Button>
         <Button onClick={rotate} title="Rotate This Device">
           <Icon
             icon={
@@ -187,8 +174,22 @@ const Toolbar = ({
             }
           />
         </Button>
-        <Button onClick={toggleRulers} title="Show rulers">
-          <Icon icon="tdesign:measurement-1" />
+        <Button
+          onClick={quickScreenshot}
+          isLoading={screenshotLoading}
+          title="Quick Screenshot"
+        >
+          <div className="relative h-4 w-4">
+            <Icon
+              icon="ic:outline-photo-camera"
+              className="absolute top-0 left-0"
+            />
+            <Icon
+              icon="clarity:lightning-solid"
+              className="absolute top-[-1px] right-[-2px]"
+              height={8}
+            />
+          </div>
         </Button>
         {/* <ColorBlindnessTools webview={webview} /> */}
         <Button
