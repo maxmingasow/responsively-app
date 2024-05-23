@@ -190,7 +190,7 @@ const Toolbar = ({
         <Button onClick={toggleRulers} title="Show rulers">
           <Icon icon="tdesign:measurement-1" />
         </Button>
-        <ColorBlindnessTools webview={webview} />
+        {/* <ColorBlindnessTools webview={webview} /> */}
         <Button
           onClick={() => onIndividualLayoutHandler(device)}
           title={`${

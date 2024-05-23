@@ -502,6 +502,7 @@ const Device = ({ isPrimary, device, setIndividualDevice }: Props) => {
       })}
     >
       <div className="flex w-full items-center justify-between">
+        {loading ? <Spinner spinnerHeight={24} /> : null}
         <div className="flex w-full justify-between">
           <span className="">
             {device.name}
@@ -510,7 +511,6 @@ const Device = ({ isPrimary, device, setIndividualDevice }: Props) => {
             </span>
           </span>
         </div>
-
         <Toolbar
           webview={ref.current}
           device={device}
@@ -521,7 +521,6 @@ const Device = ({ isPrimary, device, setIndividualDevice }: Props) => {
           onIndividualLayoutHandler={onIndividualLayoutHandler}
           isIndividualLayout={isIndividualLayout}
         />
-        {loading ? <Spinner spinnerHeight={24} /> : null}
       </div>
       <div
         style={{
