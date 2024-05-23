@@ -27,7 +27,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="relative flex items-center" ref={ref}>
+    <div className="relative mr-2 flex items-center" ref={ref}>
       <Button onClick={handleFlyout} isActive={isMenuFlyoutOpen}>
         <Icon icon="carbon:overflow-menu-vertical" />
       </Button>
