@@ -229,9 +229,10 @@ export const ColorBlindnessTools = ({ webview }: Props) => {
   }, [applySimulation]);
 
   return (
-    <VisionSimulationDropDown
-      simulationName={injectCss?.name}
-      onChange={applySimulation}
-    />
+    <></>
+    // <VisionSimulationDropDown
+    //   simulationName={injectCss?.name}
+    //   onChange={applySimulation}
+    // />
   );
 };

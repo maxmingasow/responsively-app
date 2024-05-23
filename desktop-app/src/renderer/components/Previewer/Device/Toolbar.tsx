@@ -4,10 +4,10 @@ import Button from 'renderer/components/Button';
 import useSound from 'use-sound';
 import { ScreenshotArgs, ScreenshotResult } from 'main/screenshot';
 import { Device } from 'common/deviceList';
-import WebPage from 'main/screenshot/webpage';
+// import WebPage from 'main/screenshot/webpage';
 
 import screenshotSfx from 'renderer/assets/sfx/screenshot.mp3';
-import { updateWebViewHeightAndScale } from 'common/webViewUtils';
+// import { updateWebViewHeightAndScale } from 'common/webViewUtils';
 import { ColorBlindnessTools } from './ColorBlindnessTools';
 
 interface Props {
@@ -38,11 +38,11 @@ const Toolbar = ({
     useState<boolean>(false);
   const [rotated, setRotated] = useState<boolean>(false);
 
-  const refreshView = () => {
-    if (webview) {
-      webview.reload();
-    }
-  };
+  // const refreshView = () => {
+  //   if (webview) {
+  //     webview.reload();
+  //   }
+  // };
 
   const toggleEventMirroring = async () => {
     if (webview === null) {
@@ -87,44 +87,44 @@ const Toolbar = ({
     setScreenshotLoading(false);
   };
 
-  const fullScreenshot = async () => {
-    if (webview === null) {
-      return;
-    }
-    setFullScreenshotLoading(true);
-    try {
-      const webviewTag = window.document.getElementById(device.name);
-      if (webviewTag === null) {
-        return;
-      }
-      setScreenshotInProgress(true);
-      const webPage = new WebPage(webview as unknown as Electron.WebContents);
-      const pageHeight = await webPage.getPageHeight();
+  // const fullScreenshot = async () => {
+  //   if (webview === null) {
+  //     return;
+  //   }
+  //   setFullScreenshotLoading(true);
+  //   try {
+  //     const webviewTag = window.document.getElementById(device.name);
+  //     if (webviewTag === null) {
+  //       return;
+  //     }
+  //     setScreenshotInProgress(true);
+  //     const webPage = new WebPage(webview as unknown as Electron.WebContents);
+  //     const pageHeight = await webPage.getPageHeight();
 
-      const previousHeight = webviewTag.style.height;
-      const previousTransform = webviewTag.style.transform;
-      updateWebViewHeightAndScale(webviewTag, pageHeight);
+  //     const previousHeight = webviewTag.style.height;
+  //     const previousTransform = webviewTag.style.transform;
+  //     updateWebViewHeightAndScale(webviewTag, pageHeight);
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+  //     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      await window.electron.ipcRenderer.invoke<
-        ScreenshotArgs,
-        ScreenshotResult
-      >('screenshot', {
-        webContentsId: webview.getWebContentsId(),
-        device,
-      });
+  //     await window.electron.ipcRenderer.invoke<
+  //       ScreenshotArgs,
+  //       ScreenshotResult
+  //     >('screenshot', {
+  //       webContentsId: webview.getWebContentsId(),
+  //       device,
+  //     });
 
-      webviewTag.style.height = previousHeight;
-      webviewTag.style.transform = previousTransform;
-      setScreenshotInProgress(false);
-      playScreenshotDone();
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error while taking full screenshot', error);
-    }
-    setFullScreenshotLoading(false);
-  };
+  //     webviewTag.style.height = previousHeight;
+  //     webviewTag.style.transform = previousTransform;
+  //     setScreenshotInProgress(false);
+  //     playScreenshotDone();
+  //   } catch (error) {
+  //     // eslint-disable-next-line no-console
+  //     console.error('Error while taking full screenshot', error);
+  //   }
+  //   setFullScreenshotLoading(false);
+  // };
 
   const toggleRulers = async () => {
     if (webview === null) {
@@ -139,11 +139,11 @@ const Toolbar = ({
   };
 
   return (
-    <div className="flex items-center justify-between gap-1">
-      <div className="my-1 inline-flex max-w-[75%] items-center gap-1 overflow-x-auto">
-        <Button onClick={refreshView} title="Refresh This View">
+    <div className="flex w-full items-center justify-end gap-1">
+      <div className="my-1 inline-flex items-center overflow-x-auto">
+        {/* <Button onClick={refreshView} title="Refresh This View">
           <Icon icon="ic:round-refresh" />
-        </Button>
+        </Button> */}
         <Button
           onClick={quickScreenshot}
           isLoading={screenshotLoading}
@@ -161,13 +161,13 @@ const Toolbar = ({
             />
           </div>
         </Button>
-        <Button
+        {/* <Button
           onClick={fullScreenshot}
           isLoading={fullScreenshotLoading}
           title="Full Page Screenshot"
         >
           <Icon icon="ic:outline-photo-camera" />
-        </Button>
+        </Button> */}
         <Button
           onClick={toggleEventMirroring}
           isActive={eventMirroringOff}
@@ -191,19 +191,21 @@ const Toolbar = ({
           <Icon icon="tdesign:measurement-1" />
         </Button>
         <ColorBlindnessTools webview={webview} />
+        <Button
+          onClick={() => onIndividualLayoutHandler(device)}
+          title={`${
+            isIndividualLayout ? 'Disable' : 'Enable'
+          } Individual Layout`}
+        >
+          <Icon
+            icon={
+              isIndividualLayout
+                ? 'ic:twotone-zoom-in-map'
+                : 'ic:twotone-zoom-out-map'
+            }
+          />
+        </Button>
       </div>
-      <Button
-        onClick={() => onIndividualLayoutHandler(device)}
-        title={`${isIndividualLayout ? 'Disable' : 'Enable'} Individual Layout`}
-      >
-        <Icon
-          icon={
-            isIndividualLayout
-              ? 'ic:twotone-zoom-in-map'
-              : 'ic:twotone-zoom-out-map'
-          }
-        />
-      </Button>
     </div>
   );
 };

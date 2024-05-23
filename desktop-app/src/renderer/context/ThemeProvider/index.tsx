@@ -7,7 +7,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const body = document.querySelector('body');
-    'bg-slate-200 text-light-normal dark:bg-slate-800 dark:text-dark-normal'
+    'bg-[#EFF1F5] text-light-normal dark:bg-slate-800 dark:text-dark-normal'
       .split(' ')
       .forEach((className) => {
         body?.classList.add(className);

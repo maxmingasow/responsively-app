@@ -497,29 +497,32 @@ const Device = ({ isPrimary, device, setIndividualDevice }: Props) => {
 
   return (
     <div
-      className={cx('h-fit flex-shrink-0', {
+      className={cx('h-fit', {
         'w-52': device.width < 400 && zoomfactor < 0.6,
       })}
     >
-      <div className="flex justify-between">
-        <span>
-          {device.name}
-          <span className="ml-[2px] text-xs opacity-60">
-            {width}x{height}
+      <div className="flex w-full items-center justify-between">
+        <div className="flex w-full justify-between">
+          <span className="">
+            {device.name}
+            <span className="ml-[4px] text-xs opacity-60">
+              {width}x{height}
+            </span>
           </span>
-        </span>
+        </div>
+
+        <Toolbar
+          webview={ref.current}
+          device={device}
+          setScreenshotInProgress={setScreenshotInProgess}
+          openDevTools={openDevTools}
+          toggleRuler={toggleRuler}
+          onRotate={onRotateHandler}
+          onIndividualLayoutHandler={onIndividualLayoutHandler}
+          isIndividualLayout={isIndividualLayout}
+        />
         {loading ? <Spinner spinnerHeight={24} /> : null}
       </div>
-      <Toolbar
-        webview={ref.current}
-        device={device}
-        setScreenshotInProgress={setScreenshotInProgess}
-        openDevTools={openDevTools}
-        toggleRuler={toggleRuler}
-        onRotate={onRotateHandler}
-        onIndividualLayoutHandler={onIndividualLayoutHandler}
-        isIndividualLayout={isIndividualLayout}
-      />
       <div
         style={{
           height: rulerEnabled(`${width}x${height}`)

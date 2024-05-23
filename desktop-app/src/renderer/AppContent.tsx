@@ -19,7 +19,7 @@ if ((navigator as any).userAgentData.platform === 'Windows') {
 
 const Browser = () => {
   return (
-    <div className="h-screen gap-2 overflow-hidden pt-1">
+    <div className="h-screen gap-2 overflow-hidden">
       <ToolBar />
       <Previewer />
     </div>

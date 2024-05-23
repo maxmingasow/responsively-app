@@ -100,7 +100,7 @@ const ToolBar = () => {
   useKeyboardShortcut(SHORTCUT_CHANNEL.INSPECT_ELEMENTS, handleInspectShortcut);
 
   return (
-    <div className="flex items-center justify-between gap-2">
+    <div className="flex items-center justify-between gap-2 py-1">
       <NavigationControls />
 
       <AddressBar />
