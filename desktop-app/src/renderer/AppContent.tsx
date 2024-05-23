@@ -49,8 +49,8 @@ const AppContent = () => {
       <ThemeProvider>
         <KeyboardShortcutsManager />
         <ViewComponent />
-        <ReleaseNotes />
-        <Sponsorship />
+        {/* <ReleaseNotes /> */}
+        {/* <Sponsorship /> */}
       </ThemeProvider>
     </Provider>
   );

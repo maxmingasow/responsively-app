@@ -24,12 +24,7 @@ const ColorSchemeToggle = () => {
       title="Device theme color toggle"
     >
       <span className="relative">
-        <Icon icon="iconoir:empty-page" />
-        <Icon
-          icon={isDarkColorScheme ? 'carbon:moon' : 'carbon:sun'}
-          className="absolute inset-0 m-auto"
-          fontSize={10}
-        />
+        <Icon icon={isDarkColorScheme ? 'carbon:moon' : 'carbon:sun'} />
       </span>
     </Button>
   );
