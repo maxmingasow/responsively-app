@@ -10,8 +10,8 @@ import type { AppView } from './store/features/ui';
 import { APP_VIEWS, selectAppView } from './store/features/ui';
 import DeviceManager from './components/DeviceManager';
 import KeyboardShortcutsManager from './components/KeyboardShortcutsManager';
-import { ReleaseNotes } from './components/ReleaseNotes';
-import { Sponsorship } from './components/Sponsorship';
+// import { ReleaseNotes } from './components/ReleaseNotes';
+// import { Sponsorship } from './components/Sponsorship';
 
 if ((navigator as any).userAgentData.platform === 'Windows') {
   import('./titlebar-styles.css');
@@ -19,7 +19,7 @@ if ((navigator as any).userAgentData.platform === 'Windows') {
 
 const Browser = () => {
   return (
-    <div className="h-screen gap-2 overflow-hidden pt-2">
+    <div className="h-screen gap-2 overflow-hidden pt-1">
       <ToolBar />
       <Previewer />
     </div>
