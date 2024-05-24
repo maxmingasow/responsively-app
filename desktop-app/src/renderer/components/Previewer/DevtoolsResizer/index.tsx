@@ -100,7 +100,7 @@ const DevtoolsResizer = () => {
   }, []);
 
   return (
-    <div className="border-[#d0d0d0] bg-[#f3f3f3] text-[#555]">
+    <div className="border-[#EFF1F5] bg-[#EDEFF6] text-slate-500">
       <Resizable
         className="border"
         key={dockPosition}
@@ -114,8 +114,11 @@ const DevtoolsResizer = () => {
         enable={config.resizeDirections}
       >
         <div className="flex h-full w-full flex-col">
-          <div className="flex justify-between border-b-[1px]">
-            <div>
+          <div
+            className="flex flex-grow justify-between border-b-[1px] "
+            ref={ref}
+          >
+            <div className="flex h-6 w-full items-center justify-between">
               <Button
                 onClick={() => dispatch(setIsInspecting(!isInspecting))}
                 isActive={isInspecting}
@@ -123,47 +126,47 @@ const DevtoolsResizer = () => {
               >
                 <Icon icon="lucide:inspect" />
               </Button>
-            </div>
-            <div className="flex">
-              <Button
-                onClick={() => {
-                  dispatch(setDockPosition(config.toggle.position));
-                }}
-                disableHoverEffects
-              >
-                <Icon icon={config.toggle.icon} />
-              </Button>
-              <Button
-                onClick={() => {
-                  window.electron.ipcRenderer.invoke('close-devtools');
-                  dispatch(setDockPosition(DOCK_POSITION.UNDOCKED));
-                  dispatch(setDevtoolsClose());
-                  setTimeout(() => {
-                    window.electron.ipcRenderer.invoke<
-                      OpenDevtoolsArgs,
-                      OpenDevtoolsResult
-                    >('open-devtools', {
-                      webviewId,
-                      dockPosition: DOCK_POSITION.UNDOCKED,
+              <div className="flex">
+                {' '}
+                <Button
+                  onClick={() => {
+                    dispatch(setDockPosition(config.toggle.position));
+                  }}
+                  disableHoverEffects
+                >
+                  <Icon icon={config.toggle.icon} />
+                </Button>
+                <Button
+                  onClick={() => {
+                    window.electron.ipcRenderer.invoke('close-devtools');
+                    dispatch(setDockPosition(DOCK_POSITION.UNDOCKED));
+                    dispatch(setDevtoolsClose());
+                    setTimeout(() => {
+                      window.electron.ipcRenderer.invoke<
+                        OpenDevtoolsArgs,
+                        OpenDevtoolsResult
+                      >('open-devtools', {
+                        webviewId,
+                        dockPosition: DOCK_POSITION.UNDOCKED,
+                      });
                     });
-                  });
-                }}
-                disableHoverEffects
-              >
-                <Icon icon="mdi:dock-window" />
-              </Button>
-              <Button
-                onClick={() => {
-                  window.electron.ipcRenderer.invoke('close-devtools');
-                  dispatch(setDevtoolsClose());
-                }}
-                disableHoverEffects
-              >
-                <Icon icon="ic:round-close" />
-              </Button>
+                  }}
+                  disableHoverEffects
+                >
+                  <Icon icon="mdi:dock-window" />
+                </Button>
+                <Button
+                  onClick={() => {
+                    window.electron.ipcRenderer.invoke('close-devtools');
+                    dispatch(setDevtoolsClose());
+                  }}
+                  disableHoverEffects
+                >
+                  <Icon icon="ic:round-close" />
+                </Button>
+              </div>
             </div>
           </div>
-          <div className="flex-grow" ref={ref} />
         </div>
       </Resizable>
     </div>
